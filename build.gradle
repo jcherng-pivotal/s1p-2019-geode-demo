@@ -1,0 +1,42 @@
+buildscript {
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${property('spring-boot.version')}"
+    }
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/plugins-release' }
+    }
+}
+
+allprojects {
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+
+    dependencyManagement {
+        imports {
+            mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+        }
+
+        dependencies {
+            dependency "org.springframework.geode:spring-geode-starter:${ext['spring-geode-starter.version']}"
+            dependency "io.springfox:springfox-swagger2:${ext['springfox-swagger.version']}"
+            dependency "io.springfox:springfox-swagger-ui:${ext['springfox-swagger.version']}"
+        }
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    group = 'io.pivotal.demo.geode'
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/libs-release" }
+        maven { url "https://repo.spring.io/libs-milestone" }
+        maven { url "https://repo.spring.io/libs-snapshot" }
+        maven { url "http://oss.jfrog.org/artifactory/oss-snapshot-local" }
+    }
+}

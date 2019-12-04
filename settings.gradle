@@ -1,0 +1,16 @@
+pluginManagement {
+	repositories {
+		gradlePluginPortal()
+	}
+}
+
+rootProject.name = 'geode-demo'
+
+include 'function'
+include 'client'
+
+project(':function').projectDir = new File('function')
+project(':client').projectDir = new File('client')
+
+project(':function').name = 'geode-demo-function'
+project(':client').name = 'geode-demo-client'

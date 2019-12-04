@@ -1,0 +1,7 @@
+---
+applications:
+  - name: customer-api-v2
+    memory: 2G
+    services:
+      - s1p-2019-demo-pcc
+    random-route: true
